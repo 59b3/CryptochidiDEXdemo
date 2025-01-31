@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEX Demo with WalletConnect</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>DEX Demo</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Swap</a></li>
+        <li><a href="#">Liquidity</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <!-- Wallet Connect Section -->
+    <section class="wallet-section">
+      <button id="connectWallet" onclick="connectWallet()">Connect Wallet</button>
+      <div id="walletInfo" class="wallet-info" style="display:none;">
+        <p><strong>Connected Wallet:</strong> <span id="walletAddress"></span></p>
+        <p><strong>Balance:</strong> <span id="walletBalance"></span> ETH</p>
+      </div>
+    </section>
+
+    <!-- Token Swap Section -->
+    <section class="swap-container">
+      <div class="token-swap">
+        <label for="fromToken">From Token</label>
+        <select id="fromToken">
+          <option value="eth">ETH</option>
+          <option value="btc">BTC</option>
+        </select>
+        <input type="number" id="fromAmount" placeholder="Amount" />
+      </div>
+      
+      <div class="token-swap">
+        <label for="toToken">To Token</label>
+        <select id="toToken">
+          <option value="btc">BTC</option>
+          <option value="eth">ETH</option>
+        </select>
+        <input type="number" id="toAmount" placeholder="Amount" disabled />
+      </div>
+
+      <button onclick="simulateSwap()">Swap</button>
+    </section>
+    
+    <!-- Balance Info Section -->
+    <section class="balance-info">
+      <h2>Balances</h2>
+      <div id="ethBalance">ETH: 100</div>
+      <div id="btcBalance">BTC: 50</div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
