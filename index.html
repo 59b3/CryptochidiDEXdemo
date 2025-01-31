@@ -4,60 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DEX Demo with WalletConnect</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header>
-    <h1>DEX Demo</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Swap</a></li>
-        <li><a href="#">Liquidity</a></li>
-      </ul>
-    </nav>
+<body class="bg-gray-900 text-white font-sans">
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-center">
+    <h1 class="text-4xl font-bold">DEX Demo</h1>
   </header>
   
-  <main>
-    <!-- Wallet Connect Section -->
-    <section class="wallet-section">
-      <button id="connectWallet" onclick="connectWallet()">Connect Wallet</button>
-      <div id="walletInfo" class="wallet-info" style="display:none;">
-        <p><strong>Connected Wallet:</strong> <span id="walletAddress"></span></p>
-        <p><strong>Balance:</strong> <span id="walletBalance"></span> ETH</p>
-      </div>
-    </section>
-
-    <!-- Token Swap Section -->
-    <section class="swap-container">
-      <div class="token-swap">
-        <label for="fromToken">From Token</label>
-        <select id="fromToken">
-          <option value="eth">ETH</option>
-          <option value="btc">BTC</option>
-        </select>
-        <input type="number" id="fromAmount" placeholder="Amount" />
-      </div>
+  <main class="p-6">
+    <!-- Connect Wallet Section -->
+    <section class="mb-10">
+      <button id="connectWallet" onclick="connectWallet()" class="w-full sm:w-1/3 mx-auto py-3 bg-green-600 hover:bg-green-500 rounded-lg text-xl">
+        Connect Wallet
+      </button>
       
-      <div class="token-swap">
-        <label for="toToken">To Token</label>
-        <select id="toToken">
+      <!-- Wallet Info Display -->
+      <div id="walletInfo" class="mt-6 text-center hidden">
+        <p class="font-semibold">Connected Wallet:</p>
+        <p id="walletAddress" class="text-lg mt-2">0x1234567890abcdef...</p>
+        <p class="mt-2">Balance: <span id="walletBalance">10 ETH</span></p>
+      </div>
+    </section>
+
+    <!-- Swap Section -->
+    <section class="bg-gray-800 p-6 rounded-xl shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Swap Tokens</h2>
+
+      <div class="mb-4">
+        <label for="fromToken" class="block text-sm font-semibold">From Token</label>
+        <select id="fromToken" class="w-full bg-gray-700 p-3 rounded-lg text-lg">
+          <option value="eth">ETH</option>
+          <option value="btc">BTC</option>
+        </select>
+        <input type="number" id="fromAmount" placeholder="Amount" class="w-full bg-gray-700 p-3 mt-2 rounded-lg text-lg" />
+      </div>
+
+      <div class="mb-4">
+        <label for="toToken" class="block text-sm font-semibold">To Token</label>
+        <select id="toToken" class="w-full bg-gray-700 p-3 rounded-lg text-lg">
           <option value="btc">BTC</option>
           <option value="eth">ETH</option>
         </select>
-        <input type="number" id="toAmount" placeholder="Amount" disabled />
+        <input type="number" id="toAmount" placeholder="Amount" disabled class="w-full bg-gray-700 p-3 mt-2 rounded-lg text-lg" />
       </div>
 
-      <button onclick="simulateSwap()">Swap</button>
-    </section>
-    
-    <!-- Balance Info Section -->
-    <section class="balance-info">
-      <h2>Balances</h2>
-      <div id="ethBalance">ETH: 100</div>
-      <div id="btcBalance">BTC: 50</div>
+      <button onclick="simulateSwap()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 rounded-lg text-xl">
+        Swap
+      </button>
     </section>
   </main>
+
+  <!-- Modal for Wallet Connect Simulation -->
+  <div id="walletModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-gray-800 p-8 rounded-lg text-center">
+      <h3 class="text-2xl font-semibold mb-4">Connect to Your Wallet</h3>
+      <button onclick="simulateWalletConnection('MetaMask')" class="w-full py-3 bg-blue-500 rounded-lg mb-4 text-lg">MetaMask</button>
+      <button onclick="simulateWalletConnection('Trust Wallet')" class="w-full py-3 bg-teal-500 rounded-lg text-lg">Trust Wallet</button>
+      <button onclick="closeWalletModal()" class="mt-4 py-2 px-6 bg-gray-600 text-white rounded-lg">Cancel</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
