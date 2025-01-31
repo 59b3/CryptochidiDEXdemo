@@ -7,21 +7,32 @@ let mockWalletBalance = 10; // Simulated wallet balance (ETH)
 document.getElementById('fromToken').addEventListener('change', updateSwapAmount);
 document.getElementById('toToken').addEventListener('change', updateSwapAmount);
 
-// Simulate connecting to a wallet
+// Show the wallet connection modal
 function connectWallet() {
   if (!isWalletConnected) {
-    // Simulate wallet connection by changing the state
+    document.getElementById('walletModal').classList.remove('hidden');
+  } else {
+    disconnectWallet();
+  }
+}
+
+// Simulate Wallet connection (choose MetaMask or Trust Wallet)
+function simulateWalletConnection(wallet) {
+  console.log(`Connecting to ${wallet}...`);
+  // Simulate a delay before "connection"
+  setTimeout(() => {
     isWalletConnected = true;
     document.getElementById('walletAddress').textContent = mockWalletAddress;
     document.getElementById('walletBalance').textContent = mockWalletBalance;
-    document.getElementById('walletInfo').style.display = 'block';
+    document.getElementById('walletInfo').classList.remove('hidden');
     document.getElementById('connectWallet').textContent = "Disconnect Wallet";
-  } else {
-    // Simulate disconnecting the wallet
-    isWalletConnected = false;
-    document.getElementById('walletInfo').style.display = 'none';
-    document.getElementById('connectWallet').textContent = "Connect Wallet";
-  }
+    closeWalletModal();
+  }, 1000);
+}
+
+// Close the Wallet connection modal
+function closeWalletModal() {
+  document.getElementById('walletModal').classList.add('hidden');
 }
 
 // Update the "to amount" when token selection changes
